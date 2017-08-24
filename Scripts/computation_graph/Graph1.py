@@ -25,7 +25,7 @@ with graph.as_default():
     # decoder layers:
     decoder_layer1 = tf.layers.conv2d_transpose(encoder_layer3, 32, [5, 5], strides=(4, 1), padding="SAME")
     decoder_layer2 = tf.layers.conv2d_transpose(decoder_layer1, 16, [5, 5], strides=(2, 1), padding="SAME")
-    decoder_layer3 = tf.layers.conv2d_transpose(decoder_layer2, 1, [5, 5], strides=(2, 1), padding="SAME", activation=tf.nn.tanh)
+    decoder_layer3 = tf.layers.conv2d_transpose(decoder_layer2, 3, [5, 5], strides=(2, 1), padding="SAME")
 
     output = encoder_layer3 # the latent representation of the input image.
 
@@ -35,6 +35,6 @@ with graph.as_default():
 
     # define the loss for this model:
     # calculate the loss and optimize the network
-    loss = tf.div(tf.sqrt(tf.reduce_mean(tf.square(y_pred - y_true))), 2, name="loss")  # claculate the mean square error loss
+    loss = tf.div(tf.sqrt(tf.reduce_mean(tf.square(y_pred - y_true))), 2, name="loss") # claculate the mean square error loss
 
     train_op = tf.train.AdamOptimizer(learning_rate=0.001).minimize(loss, name="train_op") # using Adam optimizer for optimization
