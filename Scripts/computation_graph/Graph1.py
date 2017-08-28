@@ -53,6 +53,6 @@ with graph.as_default():
 
     # define the loss for this model:
     # calculate the loss and optimize the network
-    loss = tf.div(tf.sqrt(tf.reduce_mean(tf.square(y_pred - y_true))), 2, name="loss") # claculate the mean square error loss
+    loss = tf.sqrt(tf.reduce_mean(tf.square(y_pred - y_true)), name="loss") # claculate the mean square error loss
 
     train_op = tf.train.AdamOptimizer(learning_rate=0.001).minimize(loss, name="train_op") # using Adam optimizer for optimization
